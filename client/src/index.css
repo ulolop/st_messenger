@@ -326,3 +326,14 @@ code {
   opacity: 0.8;
   cursor: pointer;
 }
+
+.notifications {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.notifications .notification {
+  margin: 8px;
+  opacity: 0.5;
+}

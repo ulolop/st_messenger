@@ -34,8 +34,8 @@ export interface IUserInfo {
 }
 
 export interface IChatServerData {
-  type: 'room' | 'messages' | 'userInfo'
-  data: IChatRoom | IChatMessage[] | IUserInfo
+  type: 'room' | 'messages' | 'userInfo' | 'notification'
+  data: IChatRoom | IChatMessage[] | IUserInfo | IChatMessage
 }
 
 export interface IChatSliceState {

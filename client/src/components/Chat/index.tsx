@@ -3,10 +3,11 @@ import useWebSocket from 'react-use-websocket'
 import ChatInput from './ChatInput'
 import ChatWindow from './ChatWindow'
 import UserInfo from './UserInfo'
+import Notifications from './Notifications'
 import { IChatMessage, IChatRoom, IChatServerData, IGifData, IMessageData, IUserInfo } from '../../types'
 import { useAppDispatch } from '../../hooks'
 import { setMessages, updateRoom } from '../../store/chatSlice'
-import { setUserInfo } from '../../store/infoSlice'
+import { addNotification, setUserInfo } from '../../store/infoSlice'
 import { useSound } from 'use-sound'
 
 const WS_URL = 'ws://localhost'
@@ -25,6 +26,7 @@ const Chat: React.FC = () => {
     if (type === 'room') setRoomData(data as IChatRoom)
     if (type === 'messages') setMessageHistory(prev => prev.concat(data as IChatMessage[]))
     if (type === 'userInfo') dispatch(setUserInfo(data as IUserInfo))
+    if (type === 'notification') dispatch(addNotification(data as IChatMessage))
   }, [lastJsonMessage])
 
   useEffect(() => {
@@ -49,6 +51,7 @@ const Chat: React.FC = () => {
       <ChatWindow handleUserSelected={handleUserSelected} />
       <ChatInput handleClickSendMessage={handleClickSendMessage} />
       <UserInfo />
+      <Notifications />
     </>
   )
 }

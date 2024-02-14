@@ -18,7 +18,7 @@ export const infoSlice = createAppSlice({
       state.userInfo = null
     }),
     addNotification: create.reducer((state, action: PayloadAction<IChatMessage>) => {
-      state.notifications = [...state.notifications, action.payload]
+      state.notifications = [...state.notifications.slice(-2), action.payload]
     }),
     removeNotification: create.reducer((state, action: PayloadAction<number>) => {
       state.notifications.splice(action.payload, 1)
