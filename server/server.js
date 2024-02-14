@@ -1,6 +1,6 @@
 import { WebSocketServer } from 'ws'
 import { v4 as uuid } from 'uuid'
-import { defaultMessages, defaultRoom } from './testData.js'
+import { defaultMessages, defaultRoom, defaultUser, users } from './testData.js'
 
 const PORT = 8888
 const clients = {}
@@ -37,6 +37,15 @@ function onConnect(client) {
           for (const clientId in clients) {
             clients[clientId].send(JSON.stringify({ type: 'messages', data: [newMessage] }))
           }
+          break
+        case 'GET_USER':
+          console.log('GET_USER', data)
+          const userInfo = users.find(x => x.name === data) || {
+            ...defaultUser,
+            name: data,
+          }
+          client.send(JSON.stringify({ type: 'userInfo', data: userInfo }))
+          
           break
         default:
           console.log('unknown action')

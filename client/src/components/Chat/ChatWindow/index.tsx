@@ -6,7 +6,12 @@ import { formatDate } from '../../../utils'
 import ChatHeader from './ChatHeader'
 import ChatMessage from './ChatMessage'
 
-const ChatWindow: React.FC = props => {
+interface IChatWindow {
+  handleUserSelected: (message: string) => void
+}
+
+const ChatWindow: React.FC<IChatWindow> = props => {
+  const { handleUserSelected } = props
   const messages = useAppSelector(selectMessages)
   const date = formatDate(messages[messages.length - 1]?.time || Date.now())
   // TODO: update the date onscroll
@@ -26,7 +31,7 @@ const ChatWindow: React.FC = props => {
         <div className="chatWindow scroller">
           <div className="chatDate">{date}</div>
           {messages.map((message, index) => (
-            <ChatMessage key={index} {...message} />
+            <ChatMessage key={index} {...{...message, handleUserSelected}} />
           ))}
           <div ref={messagesEndRef as React.RefObject<HTMLDivElement>} />
         </div>

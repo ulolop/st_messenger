@@ -24,3 +24,25 @@ export const defaultMessages = [
     time: 1734880883000,
   },
 ]
+
+export const users = [
+  {
+    name: 'Ирина Морозова',
+    avatar: 'morozova.jpg',
+    role: 'менеджер',
+    email: 'test@test.ru',
+    phone: '8 (888) 888-88-88',
+  },
+  {
+    name: 'Анна Иванова',
+    role: 'менеджер',
+    email: 'test.mail@test.ru',
+    phone: '8 (901) 234-56-78',
+  },
+]
+
+export const defaultUser = {
+  role: 'пользователь',
+  email: 'tester@test.ru',
+  phone: '8 (800) 555-35-35',
+}

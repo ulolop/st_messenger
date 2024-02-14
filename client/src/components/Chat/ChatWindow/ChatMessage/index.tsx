@@ -1,25 +1,15 @@
-import { useAppDispatch } from '../../../../hooks'
-import { setUserInfo } from '../../../../store/infoSlice'
 import { IChatMessage } from '../../../../types'
 
 const IMG_WIDTH = 128
 
-const ChatMessage: React.FC<IChatMessage> = props => {
-  const { author, data, time, avatar } = props
+interface IMessage extends IChatMessage {
+  handleUserSelected: (message: string) => void
+}
 
-  const dispatch = useAppDispatch()
-  const showUserInfo = () => {
-    dispatch(
-      // TODO: get full user info
-      setUserInfo({
-        name: author,
-        avatar: avatar,
-        role: 'менеджер',
-        email: 'test@test.ru',
-        phone: '8 (888) 888-88-88',
-      }),
-    )
-  }
+const ChatMessage: React.FC<IMessage> = props => {
+  const { author, data, time, avatar, handleUserSelected } = props
+
+  const showUserInfo = () => handleUserSelected(author)
 
   return (
     <div className="chatMessage">
@@ -32,6 +22,7 @@ const ChatMessage: React.FC<IChatMessage> = props => {
         {data.type === 'message' && (
           <div>
             <div>{data.text}</div>
+            {/* TODO: display file */}
             {data.file && <div>{JSON.stringify(data.file)}</div>}
           </div>
         )}

@@ -23,27 +23,11 @@ const ChatInput: React.FC<IChatInput> = props => {
   const onSubmit = (event: React.FormEvent) => {
     event.preventDefault()
     if (!value && !selectedFile) return
-    console.log(selectedFile)
-    const formData = new FormData();
-    formData.append("image", selectedFile as File, (selectedFile as File).name);
-    console.log('formData', formData);
-    
     const newMessage: IMessageData = {
       type: 'message',
       text: value,
-      file: selectedFile as File
     }
-    // if (selectedFile) {
-    //   const reader = new FileReader()
-    //   reader.onload = e => {
-    //     // newMessage.file = new TextDecoder("utf-8").decode(reader.result as ArrayBuffer)
-    //     newMessage.file = new Uint8Array(reader.result as ArrayBuffer)
-    //     handleClickSendMessage(newMessage)
-    //   }
-    //   reader.readAsArrayBuffer(selectedFile)
-    // } else {
-    //   handleClickSendMessage(newMessage)
-    // }
+    if (selectedFile) newMessage.file = selectedFile
     handleClickSendMessage(newMessage)
     setValue('')
     setSelectedFile(null)
