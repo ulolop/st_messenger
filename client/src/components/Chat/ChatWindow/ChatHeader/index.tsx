@@ -1,23 +1,15 @@
-import { useAppDispatch, useAppSelector } from '../../../../hooks'
+import { useAppSelector } from '../../../../hooks'
 import { selectRoom } from '../../../../store/chatSlice'
-import { setUserInfo } from '../../../../store/infoSlice'
 
-const ChatHeader: React.FC = () => {
+interface IChatHeader {
+  handleUserSelected: (message: string) => void
+}
+
+const ChatHeader: React.FC<IChatHeader> = props => {
+  const { handleUserSelected } = props
   const { name, avatar, role, online } = useAppSelector(selectRoom)
 
-  const dispatch = useAppDispatch()
-  const showUserInfo = () => {
-    dispatch(
-      // TODO: get full user info
-      setUserInfo({
-        name: name,
-        avatar: avatar,
-        role: role,
-        email: 'test@test.ru',
-        phone: '8 (888) 888-88-88',
-      }),
-    )
-  }
+  const showUserInfo = () => handleUserSelected(name)
 
   return (
     <div className="chatHeader">

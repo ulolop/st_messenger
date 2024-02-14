@@ -172,6 +172,7 @@ code {
   font-size: 14px;
   font-weight: 400;
   line-height: 19.1px;
+  overflow-wrap: break-word;
 }
 .chatMessage .content .title{
   display: flex;
@@ -232,7 +233,7 @@ code {
   box-shadow: 0 0 15px 0 #4d4d4d26;
   z-index: 2;
 }
-.chatInput .attach .picker .preview {
+.preview {
   min-width: 128px;
   font-size: 12px;
   text-align: center;

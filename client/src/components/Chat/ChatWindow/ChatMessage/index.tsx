@@ -11,6 +11,9 @@ const ChatMessage: React.FC<IMessage> = props => {
 
   const showUserInfo = () => handleUserSelected(author)
 
+  // TODO: get image
+  const isImage = data.type === 'message' && data.file?.type?.match('image.*')
+
   return (
     <div className="chatMessage">
       <img className="avatar" src={`icons/${avatar || 'userIcon.svg'}`} alt={author} onClick={showUserInfo} />
@@ -22,8 +25,13 @@ const ChatMessage: React.FC<IMessage> = props => {
         {data.type === 'message' && (
           <div>
             <div>{data.text}</div>
-            {/* TODO: display file */}
-            {data.file && <div>{JSON.stringify(data.file)}</div>}
+            {data.file && (
+              <div className="preview">
+                {(isImage && <img src={data.file.name} alt="preview" width={128} />) || (
+                  <img src="icons/file.svg" alt="file" width={48} />
+                )}
+              </div>
+            )}
           </div>
         )}
         {data.type === 'gif' && (

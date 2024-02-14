@@ -27,7 +27,7 @@ const ChatWindow: React.FC<IChatWindow> = props => {
     <>
       <img className="chatLogo" src="icons/logo_horizontal.svg" alt="St Messenger" />
       <div className="chatContainer">
-        <ChatHeader />
+        <ChatHeader handleUserSelected={handleUserSelected}/>
         <div className="chatWindow scroller">
           <div className="chatDate">{date}</div>
           {messages.map((message, index) => (
