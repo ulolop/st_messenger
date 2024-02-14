@@ -338,3 +338,6 @@ code {
   margin: 8px;
   opacity: 0.5;
 }
+.notifications .notification:last-child {
+  opacity: 0.67;
+}
