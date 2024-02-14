@@ -1,21 +1,32 @@
+import { useEffect, useRef } from 'react'
 import { IChatMessage } from '../../../../types'
 
 const IMG_WIDTH = 128
 
 interface IMessage extends IChatMessage {
   handleUserSelected: (message: string) => void
+  updateDate: (timestamp: number) => void
 }
 
 const ChatMessage: React.FC<IMessage> = props => {
-  const { author, data, time, avatar, handleUserSelected } = props
+  const { author, data, time, avatar, handleUserSelected, updateDate } = props
+  const messageRef = useRef<HTMLElement>(null)
 
   const showUserInfo = () => handleUserSelected(author)
 
   // TODO: get image
   const isImage = data.type === 'message' && data.file?.type?.match('image.*')
 
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries, observer) => {
+      const entry = entries[0];
+      if (entry.isIntersecting) {updateDate(time)}
+    });
+    if (messageRef.current) observer.observe(messageRef.current);
+  }, []);
+
   return (
-    <div className="chatMessage">
+    <div className="chatMessage" ref={messageRef as React.RefObject<HTMLDivElement>}>
       <img className="avatar" src={`icons/${avatar || 'userIcon.svg'}`} alt={author} onClick={showUserInfo} />
       <div className="content">
         <div className="title">
