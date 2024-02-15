@@ -36,8 +36,6 @@ function onConnect(client) {
           serverData.messages.push(newMessage)
           for (const clientId in clients) {
             clients[clientId].send(JSON.stringify({ type: 'messages', data: [newMessage] }))
-          }
-          for (const clientId in clients) {
             if (clientId === userId) continue
             clients[clientId].send(JSON.stringify({ type: 'notification', data: newMessage }))
           }
