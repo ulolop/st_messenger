@@ -14,16 +14,15 @@ const ChatMessage: React.FC<IMessage> = props => {
 
   const showUserInfo = () => handleUserSelected(author)
 
-  // TODO: get image
   const isImage = data.type === 'message' && data.file?.type?.match('image.*')
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries, observer) => {
-      const entry = entries[0];
-      if (entry.isIntersecting) {updateDate(time)}
-    });
-    if (messageRef.current) observer.observe(messageRef.current);
-  }, []);
+      const entry = entries[0]
+      if (entry.isIntersecting) updateDate(time)
+    })
+    if (messageRef.current) observer.observe(messageRef.current)
+  }, [])
 
   return (
     <div className="chatMessage" ref={messageRef as React.RefObject<HTMLDivElement>}>
@@ -38,8 +37,11 @@ const ChatMessage: React.FC<IMessage> = props => {
             <div>{data.text}</div>
             {data.file && (
               <div className="preview">
-                {(isImage && <img src={data.file.name} alt="preview" width={128} />) || (
-                  <img src="icons/file.svg" alt="file" width={48} />
+                {(isImage && <img src={data.file.name} alt={data.file.name} width={128} />) || (
+                  <div>
+                    <img src="icons/file.svg" alt="file" width={48} />
+                    <div>{data.file.name}</div>
+                  </div>
                 )}
               </div>
             )}

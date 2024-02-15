@@ -15,12 +15,28 @@ export const defaultMessages = [
   {
     author: 'Ирина Морозова',
     avatar: 'morozova.jpg',
-    data: { type: 'message', text: 'Привет, задача ясна' },
+    data: {
+      type: 'message',
+      text: 'Привет, задача ясна',
+      file: {
+        name: 'text.txt',
+        type: 'text/plain',
+        size: 478,
+      },
+    },
     time: 1734880883000,
   },
   {
     author: 'Анна Иванова',
-    data: { type: 'message', text: 'Привет, задача ясна' },
+    data: {
+      type: 'message',
+      text: 'Привет, задача ясна',
+      file: {
+        name: 'icons/morozova.jpg',
+        type: 'image/jpeg',
+        size: 3447872,
+      },
+    },
     time: 1734880883000,
   },
 ]

@@ -39,6 +39,10 @@ const Chat: React.FC = () => {
   }, [messageHistory])
 
   const handleClickSendMessage = useCallback((message: IMessageData | IGifData) => {
+    // TODO: send actual files
+    if (message.type === 'message' && message.file) {
+      message.file = { ...message.file, name: message.file.name, type: message.file.type }
+    }
     sendJsonMessage({ action: 'MESSAGE', data: message })
   }, [])
 
